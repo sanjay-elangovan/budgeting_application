@@ -1,0 +1,80 @@
+1:
+  description: rent
+  known_values:
+  - tfnrealty
+2:
+  description: home
+  known_values:
+  - coned
+3:
+  description: gym
+  known_values:
+  - vital
+4:
+  description: transportation
+  known_values:
+  - mta
+5:
+  description: groceries
+  known_values:
+  - traderjoe
+6:
+  description: restaurants
+  known_values:
+  - chipotle
+  - ubereats
+  - mcdonalds
+  - gregoryscoffee
+  - cutletsco
+  - vinniespizzeria
+  - sweetgreen
+  - levain
+  - centralparkcafe
+  - abcv
+7:
+  description: drinks
+  known_values:
+  - clintonhall
+  - jewelthief
+8:
+  description: entertainment
+  known_values:
+  - karishmottcom
+  - mmaadmissions
+9:
+  description: other
+  known_values: []
+10:
+  description: travel
+  known_values: []
+11:
+  description: cash
+  known_values:
+  - withdrwl
+12:
+  description: ubers
+  known_values:
+  - ubertrip
+  - lyft
+13:
+  description: brokerage
+  known_values:
+  - wfcs
+14:
+  description: income
+  known_values:
+  - thebostonconsudesdirectdep
+15:
+  description: transfers
+  known_values:
+  - chk7895
+  - crd5201
+  - venmodespaymentid
+16:
+  description: redo
+  known_values: []
+17:
+  description: ignore
+  known_values:
+  - beginningbalance
+  - endingbalance
