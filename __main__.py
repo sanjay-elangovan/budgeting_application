@@ -1,7 +1,7 @@
 import click
 from pipelines.read import ReadData
 from pipelines.classify import ClassifyData
-from pipelines.analyze import analyze_data
+from pipelines.analyze import AnalyzeData
 
 
 @click.group()
@@ -23,11 +23,11 @@ def run(read: bool, classify: bool, analyze: bool) -> None:
         elif classify:
             ClassifyData().make_calculations()
         elif analyze:
-            analyze_data()
+            AnalyzeData().make_calculations()
     else:
         ReadData().make_calculations()
         ClassifyData().make_calculations()
-        analyze_data()
+        AnalyzeData().make_calculations()
 
 
 if __name__ == '__main__':

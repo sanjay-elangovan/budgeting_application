@@ -1,2 +1,3 @@
-def analyze_data():
-    print("analyze!")
+class AnalyzeData:
+    def make_calculations(self):
+        print("analyze!")
