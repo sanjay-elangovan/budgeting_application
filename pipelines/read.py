@@ -36,7 +36,7 @@ class ReadData:
                 .pipe(self._get_dates)
                 .pipe(self._add_source, config_name=config_name)
                 .pipe(self._clean_descriptions)
-                .pipe(self._drop_invalid_amounts)
+                .pipe(self._clean_amounts, config=config)
             )
             # Combine and reset the index
             transactions = pd.concat([transactions, cleaned_data])
@@ -83,8 +83,14 @@ class ReadData:
         return df
 
     @staticmethod
-    def _drop_invalid_amounts(df: pd.DataFrame) -> pd.DataFrame:
+    def _clean_amounts(df: pd.DataFrame, config: dict) -> pd.DataFrame:
         """
         Any amount which is null should be dropped - These had no effect on the budget
+        Also invert amounts if that filter is selected as true
         """
-        return df.dropna(subset=F.amount)
+        df = df.dropna(subset=F.amount)
+
+        if config[F.invert_amounts] == True:
+            df[F.amount] = df[F.amount] * -1
+
+        return df

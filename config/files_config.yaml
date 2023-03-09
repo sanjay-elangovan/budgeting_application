@@ -4,6 +4,7 @@ datasource:
     archive_path: ../transactions/BoFA/Credit/Archive/
     extension: csv
     skiprows: 0
+    invert_amounts: False
     column_mapping: {"Posted Date": "Date", "Payee": "Description"}
 
   bofa_debit:
@@ -11,6 +12,7 @@ datasource:
     archive_path: ../transactions/BoFA/Debit/Archive/
     extension: csv
     skiprows: 6
+    invert_amounts: False
     column_mapping: {}
 
   venmo:
@@ -18,6 +20,7 @@ datasource:
     archive_path: ../transactions/Venmo/Archive/
     extension: csv
     skiprows: 2
+    invert_amounts: False
     column_mapping: {"Datetime": "Date", "Note": "Description", "Amount (total)": "Amount"}
 
   amex:
@@ -25,6 +28,7 @@ datasource:
     archive_path: ../transactions/Amex/Archive/
     extension: csv
     skiprows: 0
+    invert_amounts: True
     column_mapping: {}
 
 generated_file:
@@ -41,3 +45,10 @@ generated_file:
     extension: csv
     skiprows: 0
     column_mapping: {}
+
+  aggregated_transactions:
+    path: ../transactions
+    archive_path: ../transactions/transactions_archive/
+    extension: csv
+    skiprows: 0
+    column_mapping: { }

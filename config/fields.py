@@ -24,6 +24,7 @@ class Fields:
     archive_path = "archive_path"
     skiprows = "skiprows"
     extension = "extension"
+    invert_amounts = "invert_amounts"
     column_mapping = "column_mapping"
     known_values = "known_values"
     config_description = "description"
