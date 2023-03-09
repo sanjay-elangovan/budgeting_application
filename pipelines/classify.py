@@ -37,7 +37,14 @@ class ClassifyData:
         # Save off data for manual review
         save_generated_file(classified_data, generated_file_config, Files.classified_transactions)
 
-        # TODO Ask for manual review, re-read data, and re-save data
+        # Ask for manual review, re-read data, and re-save data
+        self._manual_review(generated_file_config)
+
+    @staticmethod
+    def _manual_review(generated_file_config):
+        input("Completed manual review?")
+        reclassified_transactions = read_generated_data(generated_file_config, Files.classified_transactions)
+        save_generated_file(reclassified_transactions, generated_file_config, Files.classified_transactions)
 
     @staticmethod
     def _identify_known_transactions(df: pd.DataFrame, config: dict) -> pd.DataFrame:

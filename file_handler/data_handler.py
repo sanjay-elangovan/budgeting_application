@@ -35,4 +35,6 @@ def read_raw_data(config: dict) -> pd.DataFrame:
 def read_generated_data(config: dict, file: str) -> pd.DataFrame:
     file_config = config[file]
     generated_data_filepath = os.path.join(file_config[F.path], (file + "." + file_config[F.extension]))
-    return pd.read_csv(generated_data_filepath)
+    generated_data = pd.read_csv(generated_data_filepath)
+    generated_data[F.date] = pd.to_datetime(generated_data[F.date])
+    return generated_data
