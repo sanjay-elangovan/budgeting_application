@@ -18,8 +18,12 @@ class Fields:
     transaction_category = "transaction_category"
 
     # Config fields
+    datasources = "datasources"
+    generated_files = "generated_files"
     path = "path"
+    archive_path = "archive_path"
     skiprows = "skiprows"
+    extension = "extension"
     column_mapping = "column_mapping"
     known_values = "known_values"
     config_description = "description"

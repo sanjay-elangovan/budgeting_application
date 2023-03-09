@@ -1,6 +1,6 @@
 import pandas as pd
 import yaml
-from constants import DATASOURCES_CONFIG, TRANSACTIONS_CONFIG, DATASOURCES, TRANSACTIONS
+from constants import FILES_CONFIG, TRANSACTIONS_CONFIG, FILES, TRANSACTIONS
 
 
 def read_config(config_selection: str) -> dict:
@@ -29,8 +29,8 @@ def config_yaml_reader(config_path: str) -> dict:
 
 
 def config_selector(config_selection: str) -> str:
-    if config_selection == DATASOURCES:
-        config_path = DATASOURCES_CONFIG
+    if config_selection == FILES:
+        config_path = FILES_CONFIG
     elif config_selection == TRANSACTIONS:
         config_path = TRANSACTIONS_CONFIG
 

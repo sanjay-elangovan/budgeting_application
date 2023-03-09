@@ -3,8 +3,8 @@ import pandas as pd
 from config.files import Files
 from config.fields import Fields as F
 from file_handler.config_handler import read_config
-from file_handler.data_handler import get_archive_filename
-from constants import DATASOURCES, TRANSACTIONS_FOLDER, TRANSACTIONS_ARCHIVE_FOLDER
+from file_handler.data_handler import read_raw_data, archive_file, save_generated_file
+from constants import FILES
 
 AMOUNT_CLEANING = {
     ",": "",
@@ -19,13 +19,16 @@ AMOUNT_CLEANING = {
 class ReadData:
     def make_calculations(self) -> None:
         # Get Datasource and Configs
-        datasources_config = read_config(DATASOURCES)
+        datasource_config = read_config(FILES)[F.datasources]
+        generated_file_config = read_config(FILES)[F.generated_files]
 
-        # Loop through config to read in each datasource. Combine into one dataframe.
+        # Loop through datasources in config to read in each datasource. Combine into one dataframe.
         transactions = pd.DataFrame()
-        for config_name in datasources_config:
-            config = datasources_config[config_name]
-            raw_data = self._read_datasource(config)
+        for config_name in datasource_config:
+            config = datasource_config[config_name]
+            raw_data = read_raw_data(config)
+
+            # Clean the raw data
             cleaned_data = (
                 raw_data
                 .pipe(self._unify_columns, config=config)
@@ -35,16 +38,15 @@ class ReadData:
                 .pipe(self._clean_descriptions)
                 .pipe(self._drop_invalid_amounts)
             )
+            # Combine and reset the index
             transactions = pd.concat([transactions, cleaned_data])
             transactions.reset_index(inplace=True, drop=True)
 
-        # Pickle transactions and save to archive
-        transactions.to_pickle(TRANSACTIONS_FOLDER / Files.current_transactions_pkl)
-        transactions.to_csv(TRANSACTIONS_ARCHIVE_FOLDER / get_archive_filename(transactions, Files.current_transactions_pkl))
+            # Move parsed file into archive directory
+            archive_file(transactions, config, config_name)
 
-    @staticmethod
-    def _read_datasource(config: dict) -> pd.DataFrame:
-        return pd.read_csv(config[F.path], skiprows=config[F.skiprows])
+        # Save transactions to archive
+        save_generated_file(transactions, generated_file_config, Files.transactions)
 
     @staticmethod
     def _unify_columns(df: pd.DataFrame, config: dict) -> pd.DataFrame:

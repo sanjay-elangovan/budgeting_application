@@ -1,11 +1,13 @@
 import pandas as pd
 from tabulate import tabulate
 import re
+import os
 
 from config.files import Files
 from config.fields import Fields as F
 from file_handler.config_handler import read_config, write_config
-from constants import TRANSACTIONS, TRANSACTIONS_FOLDER, TRANSACTIONS_ARCHIVE_FOLDER
+from file_handler.data_handler import read_generated_data, save_generated_file
+from constants import TRANSACTIONS, FILES
 
 SELECTED_COLUMNS = [
     F.date,
@@ -19,24 +21,23 @@ SELECTED_COLUMNS = [
 
 class ClassifyData:
     def make_calculations(self) -> None:
-        # Read in the transactions config and current transactions
-        config = read_config(TRANSACTIONS)
-        current_transactions = pd.read_pickle(TRANSACTIONS_FOLDER / Files.current_transactions_pkl)
+        # Read in the configs and current transactions
+        transactions_config = read_config(TRANSACTIONS)
+        generated_file_config = read_config(FILES)[F.generated_files]
+
+        current_transactions = read_generated_data(generated_file_config, Files.transactions)
 
         # Run classification pipeline - Automatically identify transactions, then ask the user to identify the rest
         classified_data = (
-            current_transactions.pipe(self._identify_known_transactions, config=config)
+            current_transactions.pipe(self._identify_known_transactions, config=transactions_config)
             .pipe(self._select_columns)
-            .pipe(self._identify_unknown_transactions, config=config)
+            .pipe(self._identify_unknown_transactions, config=transactions_config)
         )
 
         # Save off data for manual review
-        classified_data.to_csv(TRANSACTIONS_FOLDER / Files.classified_current_transactions_csv)
+        save_generated_file(classified_data, generated_file_config, Files.classified_transactions)
 
-        # Read in files after manual review, save into archive
-        reviewed_data = pd.read_csv(TRANSACTIONS_FOLDER / Files.classified_current_transactions_csv)
-        reviewed_data.to_csv(TRANSACTIONS_ARCHIVE_FOLDER / self.get_archive_filename(reviewed_data, Files.classified_current_transactions_csv))
-
+        # TODO Ask for manual review, re-read data, and re-save data
 
     @staticmethod
     def _identify_known_transactions(df: pd.DataFrame, config: dict) -> pd.DataFrame:

@@ -1,0 +1,43 @@
+datasources:
+  bofa_credit:
+    path: ../transactions/BoFA/Credit/currentTransaction_5201.csv
+    archive_path: ../transactions/BoFA/Credit/Archive/
+    extension: csv
+    skiprows: 0
+    column_mapping: {"Posted Date": "Date", "Payee": "Description"}
+
+  bofa_debit:
+    path: ../transactions/BoFA/Debit/stmt.csv
+    archive_path: ../transactions/BoFA/Debit/Archive/
+    extension: csv
+    skiprows: 6
+    column_mapping: {}
+
+  venmo:
+    path: ../transactions/Venmo/transaction_history.csv
+    archive_path: ../transactions/Venmo/Archive/
+    extension: csv
+    skiprows: 2
+    column_mapping: {"Datetime": "Date", "Note": "Description", "Amount (total)": "Amount"}
+
+  amex:
+    path: ../transactions/Amex/activity.csv
+    archive_path: ../transactions/Amex/Archive/
+    extension: csv
+    skiprows: 0
+    column_mapping: {}
+
+generated_files:
+  transactions:
+    path: ../transactions
+    archive_path: ../transactions/transactions_archive/
+    extension: csv
+    skiprows: 0
+    column_mapping: {}
+
+  classified_transactions:
+    path: ../transactions
+    archive_path: ../transactions/transactions_archive/
+    extension: csv
+    skiprows: 0
+    column_mapping: {}
