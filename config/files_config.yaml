@@ -1,4 +1,4 @@
-datasources:
+datasource:
   bofa_credit:
     path: ../transactions/BoFA/Credit/currentTransaction_5201.csv
     archive_path: ../transactions/BoFA/Credit/Archive/
@@ -27,7 +27,7 @@ datasources:
     skiprows: 0
     column_mapping: {}
 
-generated_files:
+generated_file:
   transactions:
     path: ../transactions
     archive_path: ../transactions/transactions_archive/

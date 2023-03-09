@@ -1,6 +1,5 @@
 import pandas as pd
 from config.fields import Fields as F
-from config.files import Files
 import shutil
 import os
 

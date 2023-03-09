@@ -4,7 +4,7 @@ from config.files import Files
 from config.fields import Fields as F
 from file_handler.config_handler import read_config
 from file_handler.data_handler import read_raw_data, archive_file, save_generated_file
-from constants import FILES
+from constants import DATASOURCE, GENERATED_FILE
 
 AMOUNT_CLEANING = {
     ",": "",
@@ -19,8 +19,8 @@ AMOUNT_CLEANING = {
 class ReadData:
     def make_calculations(self) -> None:
         # Get Datasource and Configs
-        datasource_config = read_config(FILES)[F.datasources]
-        generated_file_config = read_config(FILES)[F.generated_files]
+        datasource_config = read_config(DATASOURCE)
+        generated_file_config = read_config(GENERATED_FILE)
 
         # Loop through datasources in config to read in each datasource. Combine into one dataframe.
         transactions = pd.DataFrame()

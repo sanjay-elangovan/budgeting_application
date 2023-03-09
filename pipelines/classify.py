@@ -7,7 +7,7 @@ from config.files import Files
 from config.fields import Fields as F
 from file_handler.config_handler import read_config, write_config
 from file_handler.data_handler import read_generated_data, save_generated_file
-from constants import TRANSACTIONS, FILES
+from constants import TRANSACTIONS, GENERATED_FILE
 
 SELECTED_COLUMNS = [
     F.date,
@@ -23,7 +23,7 @@ class ClassifyData:
     def make_calculations(self) -> None:
         # Read in the configs and current transactions
         transactions_config = read_config(TRANSACTIONS)
-        generated_file_config = read_config(FILES)[F.generated_files]
+        generated_file_config = read_config(GENERATED_FILE)
 
         current_transactions = read_generated_data(generated_file_config, Files.transactions)
 
