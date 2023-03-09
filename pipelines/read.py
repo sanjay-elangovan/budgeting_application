@@ -33,6 +33,7 @@ class ReadData:
                 .pipe(self._get_dates)
                 .pipe(self._add_source, config_name=config_name)
                 .pipe(self._clean_descriptions)
+                .pipe(self._drop_invalid_amounts)
             )
             transactions = pd.concat([transactions, cleaned_data])
             transactions.reset_index(inplace=True, drop=True)
@@ -78,3 +79,10 @@ class ReadData:
             .str.replace('\W+', "", regex=True)
         )
         return df
+
+    @staticmethod
+    def _drop_invalid_amounts(df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Any amount which is null should be dropped - These had no effect on the budget
+        """
+        return df.dropna(subset=F.amount)
