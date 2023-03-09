@@ -1,5 +1,12 @@
 class Fields:
     # Raw data fields
+    posted_date = "Posted Date"
+    payee = "Payee"
+    datetime = "Datetime"
+    note = "Note"
+    amount_total = "Amount(total)"
+
+    # Cleaned data fields
     amount = "Amount"
     date = "Date"
     description = "Description"

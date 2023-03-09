@@ -1,4 +1,4 @@
-bofa_credit: 
+bofa_credit:
   path: ../transactions/BoFA/Credit/currentTransaction_5201.csv
   skiprows: 0
   column_mapping: {"Posted Date": "Date", "Payee": "Description"}
@@ -12,3 +12,8 @@ venmo:
   path: ../transactions/Venmo/transaction_history.csv
   skiprows: 2
   column_mapping: {"Datetime": "Date", "Note": "Description", "Amount (total)": "Amount"}
+
+amex:
+  path: ../transactions/Amex/activity.csv
+  skiprows: 0
+  column_mapping: {}

@@ -46,35 +46,35 @@ class ReadData:
         return pd.read_csv(config[F.path], skiprows=config[F.skiprows])
 
     @staticmethod
-    def _unify_columns(transactions: pd.DataFrame, config: dict) -> pd.DataFrame:
-        return transactions.rename(columns=config[F.column_mapping])
+    def _unify_columns(df: pd.DataFrame, config: dict) -> pd.DataFrame:
+        return df.rename(columns=config[F.column_mapping])
 
     @staticmethod
-    def _unify_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
-        transactions[F.amount] = transactions[F.amount].replace(AMOUNT_CLEANING, regex=True).astype('float')
-        return transactions
+    def _unify_transactions(df: pd.DataFrame) -> pd.DataFrame:
+        df[F.amount] = df[F.amount].replace(AMOUNT_CLEANING, regex=True).astype('float')
+        return df
 
     @staticmethod
-    def _get_dates(transactions: pd.DataFrame) -> pd.DataFrame:
-        transactions[F.date] = pd.to_datetime(transactions[F.date])
-        return transactions
+    def _get_dates(df: pd.DataFrame) -> pd.DataFrame:
+        df[F.date] = pd.to_datetime(df[F.date])
+        return df
 
     @staticmethod
-    def _add_source(transactions: pd.DataFrame, config_name: str) -> pd.DataFrame:
-        transactions[F.source] = config_name
-        return transactions
+    def _add_source(df: pd.DataFrame, config_name: str) -> pd.DataFrame:
+        df[F.source] = config_name
+        return df
 
     @staticmethod
-    def _clean_descriptions(transactions: pd.DataFrame) -> pd.DataFrame:
+    def _clean_descriptions(df: pd.DataFrame) -> pd.DataFrame:
         """
         Fill NaN description with 'No Information'
         Lowercase all descriptions
         Remove all spaces
         """
-        transactions[F.cleaned_description] = (
-            transactions[F.description]
+        df[F.cleaned_description] = (
+            df[F.description]
             .fillna("No information")
             .str.lower()
             .str.replace('\W+', "", regex=True)
         )
-        return transactions
+        return df
