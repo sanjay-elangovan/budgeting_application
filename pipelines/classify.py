@@ -26,7 +26,6 @@ class ClassifyData:
         generated_file_config = read_config(GENERATED_FILE)
 
         current_transactions = read_generated_data(generated_file_config, Files.transactions)
-
         # Run classification pipeline - Automatically identify transactions, then ask the user to identify the rest
         classified_data = (
             current_transactions.pipe(self._identify_known_transactions, config=transactions_config)
@@ -54,8 +53,9 @@ class ClassifyData:
             description = config[key][F.config_description]
 
             # If the known_values string isn't empty, create a new column called "transaction_type" with the type
+            # Emojis return nulls in the str.contains -- These are filled with "FALSE"
             if len(known_values_string) > 1:
-                df.loc[df[F.cleaned_description].str.contains(known_values_string), [F.transaction_key,
+                df.loc[df[F.cleaned_description].str.contains(known_values_string).fillna(False), [F.transaction_key,
                                                                                      F.transaction_category]] = key, description
 
         return df
@@ -87,6 +87,10 @@ class ClassifyData:
 
         # Update the manual labels
         manually_labeled_transactions['transaction_key'] = typelist
+
+        # Fill in the missing classifications
+
+
         return df.combine_first(manually_labeled_transactions.set_index('index'))
 
     @staticmethod

@@ -25,8 +25,8 @@ def archive_file(transactions: pd.DataFrame, config: dict, config_name: str) -> 
 
 def save_generated_file(df: pd.DataFrame, config: dict, file: str) -> None:
     generated_file_config = config[file]
-    df.to_csv(os.path.join(generated_file_config[F.path], get_current_filename(file, generated_file_config[F.extension])))
-    df.to_csv(os.path.join(generated_file_config[F.archive_path],  get_archive_filename(df, file, generated_file_config[F.extension])))
+    df.to_csv(os.path.join(generated_file_config[F.path], get_current_filename(file, generated_file_config[F.extension])), index=False)
+    df.to_csv(os.path.join(generated_file_config[F.archive_path],  get_archive_filename(df, file, generated_file_config[F.extension])), index=False)
 
 
 def read_raw_data(config: dict) -> pd.DataFrame:

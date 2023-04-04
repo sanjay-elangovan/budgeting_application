@@ -10,7 +10,6 @@ AGGREGATE_FIELDS = [
     F.amount,
     F.transaction_category,
     F.date,
-
 ]
 
 class AnalyzeData:
@@ -31,6 +30,7 @@ class AnalyzeData:
 
     @staticmethod
     def _aggregate_data(df: pd.DataFrame) -> pd.DataFrame:
+        df[F.amount] = df[F.amount].astype(float)
         return (
             df
             .groupby(F.transaction_key)[[F.amount]].sum()
@@ -41,4 +41,4 @@ class AnalyzeData:
 
     @staticmethod
     def _select_fields(df: pd.DataFrame) -> pd.DataFrame:
-        return df[AGGREGATE_FIELDS]
+        return df[AGGREGATE_FIELDS].sort_values(by=F.transaction_key)

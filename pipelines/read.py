@@ -76,9 +76,9 @@ class ReadData:
         """
         df[F.cleaned_description] = (
             df[F.description]
+            .str.replace('\W+', "", regex=True)
             .fillna("No information")
             .str.lower()
-            .str.replace('\W+', "", regex=True)
         )
         return df
 

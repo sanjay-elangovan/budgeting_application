@@ -18,6 +18,9 @@
   description: groceries
   known_values:
   - traderjoe
+  - hamptonsfoodmarket
+  - hmart
+  - breadbutter
 6:
   description: restaurants
   known_values:
@@ -32,32 +35,81 @@
   - centralparkcafe
   - abcv
   - mercado
+  - mochinut
+  - wonderbagels
+  - malaproject
+  - mochinut
+  - sugarfish
+  - maggiesfarm
+  - grandarmy
+  - namkeen
+  - pizza
+  - gracestreet
+  - carminespizzeria
+  - spotdessertbar
+  - shakeshack
+  - potbelly
+  - blackseed
+  - championpizza
+  - tacobell
+  - diginn
+  - brunch
+  - casamono
+  - donerhaus
+  - frescabowl
+  - coffeeroasters
+  - rowdyrooster
+  - mine
+  - tacomahal
+  - apolloid
+  - rosamexicano
+  - blossom
+  - sweetwaterrestaurant
+  - saravanaabhavan
+  - rosies
+  - mochii
+  - lhasa
+  - katiroll
 7:
   description: drinks
   known_values:
   - clintonhall
   - jewelthief
+  - turnmillbar
+  - ainslie
+  - drinks
+  - ayza
+  - cooperscraft
+  - cafebalearica
 8:
   description: entertainment
   known_values:
   - karishmottcom
   - mmaadmissions
+  - amc
+  - brooklyngrange
+  - amermusnathist
+  - bowling
+  - ticketdriver
+  - seatgeek
+  - recreationalpluseastv
 9:
   description: other
   known_values:
   - fellowbarbe
+  - uniqlo
 10:
   description: travel
-  known_values: []
+  known_values:
+  - honoluluhi
+  - lasvegasnv
 11:
   description: cash
   known_values:
   - withdrwl
 12:
   description: ubers
-  known_values:
-  - ubertrip
-  - lyft
+  known_values: []
 13:
   description: brokerage
   known_values:
@@ -66,6 +118,8 @@
   description: income
   known_values:
   - thebostonconsudesdirectdep
+  - cashreward
+  - cashback
 15:
   description: transfers
   known_values:
